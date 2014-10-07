@@ -119,6 +119,9 @@ class LCDproc_extra_mdm166a(LCDproc_extra_base):
     # General states
     if icon == LCD_EXTRAICONS.LCD_EXTRAICON_MUTE:
       self._SetIconStateDo(MDM166A_ICONS.ICON_MUTE, state)
+      
+    if icon == LCD_EXTRAICONS.LCD_EXTRAICON_AT:
+      self._SetIconStateDo(MDM166A_ICONS.ICON_AT, state)
 
     elif icon == LCD_EXTRAICONS.LCD_EXTRAICON_PLAYING:
       self._SetIconStateDo(MDM166A_ICONS.ICON_PLAY, state)

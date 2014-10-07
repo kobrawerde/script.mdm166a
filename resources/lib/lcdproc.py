@@ -218,7 +218,7 @@ class LCDProc(LcdBase):
         connected = True
 
       else:
-        log(xbmc.LOGERROR, "Connection successful but LCD.xml has errors, aborting connect")
+        log(xbmc.LOGERROR, "Connection successful but VFD.xml has errors, aborting connect")
 
     if not connected:
       # preventively close socket

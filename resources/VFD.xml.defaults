@@ -1,0 +1,59 @@
+<lcd>
+ <!-- for Futaba MDM166a 16x2 VFD -->
+ <scrollseparator>*</scrollseparator>
+ <progressbarsurroundings>off</progressbarsurroundings>
+ <icontextoffset>2</icontextoffset>
+ <allowemptylines>off</allowemptylines>
+ <disableplayindicatoronpause>true</disableplayindicatoronpause>
+ <centerbigdigits>on</centerbigdigits>
+ <extrabar2>volumehidden</extrabar2>
+ <navigation>
+  <line>$INFO[System.CurrentWindow]</line>
+  <line>$INFO[LCD.AlignCenter]$INFO[System.CurrentControl]</line>
+  <line>$INFO[LCD.AlignCenter]$INFO[VideoPlayer.ChannelNumber,, ]$INFO[VideoPlayer.ChannelName]</line>
+  <line>$INFO[VideoPlayer.PlaylistPosition]$INFO[VideoPlayer.PlaylistLength,/,. ]$INFO[VideoPlayer.Artist,, - ]$INFO[VideoPlayer.Title]</line>
+  <line>$INFO[MusicPlayer.PlaylistPosition]$INFO[MusicPlayer.PlaylistLength,/,. ]$INFO[MusicPlayer.Artist,, - ]$INFO[MusicPlayer.Title]$INFO[MusicPlayer.Album, (,) ]</line>
+  <line>$INFO[Slideshow.Filename]</line>
+  <line>$INFO[LCD.AlignCenter]$INFO[Slideshow.Filedate]</line>
+  <line>$INFO[LCD.AlignCenter]$INFO[System.Time(hh:mm)]</line>
+  <line>$INFO[LCD.AlignCenter]$LOCALIZE[20186]</line>
+ </navigation>
+ <music>
+  <line>$INFO[MusicPlayer.PlaylistPosition]$INFO[MusicPlayer.PlaylistLength,/,. ]$INFO[MusicPlayer.Artist,, - ]$INFO[MusicPlayer.Title]$INFO[MusicPlayer.Album, (,) ]</line>
+  <line>$INFO[LCD.AlignRight]$INFO[MusicPlayer.Time]$INFO[MusicPlayer.Duration,/]</line>
+ </music>
+ <video>
+  <line>$INFO[LCD.AlignRight]$INFO[VideoPlayer.Time]</line>
+ </video>
+ <tvshow>
+  <line>$INFO[LCD.AlignRight]$INFO[VideoPlayer.Time]</line>
+ </tvshow>
+ <musicvideo>
+  <line>$INFO[VideoPlayer.PlaylistPosition]$INFO[VideoPlayer.PlaylistLength,/,. ]$INFO[VideoPlayer.Artist,, - ]$INFO[VideoPlayer.Title]$INFO[VideoPlayer.Album, (,) ]</line>
+  <line>$INFO[LCD.AlignRight]$INFO[VideoPlayer.Time]$INFO[VideoPlayer.Duration,/]</line>
+ </musicvideo>
+ <general>
+  <line>$INFO[MusicPlayer.PlaylistPosition]$INFO[MusicPlayer.PlaylistLength,/,. ]$INFO[MusicPlayer.Artist,, - ]$INFO[MusicPlayer.Title]$INFO[MusicPlayer.Album, (,) ]</line>
+  <line>$INFO[LCD.AlignRight]$INFO[Player.Time]$INFO[MusicPlayer.Duration,/]</line>
+  <line>$INFO[Slideshow.Filename]</line>
+  <line>$INFO[LCD.AlignCenter]$INFO[Slideshow.Filedate]</line>
+  <line>$INFO[LCD.AlignCenter]$INFO[System.Time(hh:mm)]</line>
+ </general>
+ <screensaver>
+  <line>$INFO[LCD.AlignCenter]$INFO[System.Time(hh:mm)]</line>
+  <line>$INFO[LCD.AlignCenter]$INFO[VideoPlayer.ChannelNumber,, ]$INFO[VideoPlayer.ChannelName]</line>
+  <line>$INFO[VideoPlayer.PlaylistPosition]$INFO[VideoPlayer.PlaylistLength,/,. ]$INFO[VideoPlayer.Artist,, - ]$INFO[VideoPlayer.Title]</line>
+  <line>$INFO[MusicPlayer.PlaylistPosition]$INFO[MusicPlayer.PlaylistLength,/,. ]$INFO[MusicPlayer.Artist,, - ]$INFO[MusicPlayer.Title]$INFO[MusicPlayer.Album, (,) ]</line>
+ </screensaver>
+ <xbelaunch>
+  <line>Program</line>
+  <line>$INFO[LCD.AlignCenter]$INFO[System.LaunchXBE]</line>
+ </xbelaunch>
+ <pvrtv>
+  <line>$INFO[LCD.AlignCenter]$INFO[VideoPlayer.ChannelNumber,,.]$INFO[VideoPlayer.ChannelName]</line>
+ </pvrtv>
+ <pvrradio>
+  <line>$INFO[LCD.AlignCenter]$INFO[MusicPlayer.ChannelNumber,,.]$INFO[MusicPlayer.ChannelName]</line>
+  <line>$INFO[MusicPlayer.Artist,, - ]$INFO[MusicPlayer.Title]</line>
+ </pvrradio>
+</lcd>

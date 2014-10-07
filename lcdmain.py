@@ -26,10 +26,10 @@ import xbmcaddon
 import time
 import os
 
-__settings__   = xbmcaddon.Addon(id='script.xbmc.lcdproc')
+__settings__   = xbmcaddon.Addon(id='script.mdm166a')
 __cwd__        = __settings__.getAddonInfo('path')
 __icon__       = os.path.join(__cwd__,"icon.png")
-__scriptname__ = "XBMC LCDproc"
+__scriptname__ = "Futaba mdm166a"
 
 BASE_RESOURCE_PATH = xbmc.translatePath( os.path.join( __cwd__, 'resources', 'lib' ) )
 sys.path.insert(0, BASE_RESOURCE_PATH)
@@ -79,6 +79,7 @@ def getLcdMode():
   screenSaver = InfoLabel_IsScreenSaverActive()
   playingVideo = InfoLabel_PlayingVideo()
   playingTVShow = InfoLabel_PlayingTVShow()
+  playingMusicvideo = InfoLabel_PlayingMusicvideo()
   playingMusic = InfoLabel_PlayingAudio()
   playingPVRTV = InfoLabel_PlayingLiveTV()
   playingPVRRadio = InfoLabel_PlayingLiveRadio()
@@ -93,6 +94,8 @@ def getLcdMode():
     ret = LCD_MODE.LCD_MODE_PVRRADIO
   elif playingTVShow:
     ret = LCD_MODE.LCD_MODE_TVSHOW
+  elif playingMusicvideo:
+    ret = LCD_MODE.LCD_MODE_MUSICVIDEO
   elif playingVideo:
     ret = LCD_MODE.LCD_MODE_VIDEO
   elif playingMusic:

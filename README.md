@@ -1,14 +1,9 @@
-XBMC LCDproc Python addon
-==========================
+XBMC LCDproc Python addon for Futaba mdm166a.
+=============================================
 
 Copyright (C) 2012 Team XBMC, Daniel 'herrnst' Scheller
 Based on initial work (C) 2012 Memphiz/Team XBMC
-
-LCDproc support for XBMC implemented in Python, direct drop-in replacement for
-the LCD support in XBMC core.
-
-See https://github.com/herrnst/script.xbmc.lcdproc/wiki for details and usage
-information.
+/modded by D.K.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

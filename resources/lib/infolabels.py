@@ -118,6 +118,9 @@ def InfoLabel_PlayingTVShow():
   else:
     return False
 
+def InfoLabel_PlayingMusicvideo():
+  return InfoLabel_GetBool("VideoPlayer.Content(musicvideos)")
+
 def InfoLabel_PlayingAudio():
   return InfoLabel_GetBool("Player.HasAudio")
 
@@ -199,7 +202,10 @@ def InfoLabel_IsScreenSaverActive():
   return InfoLabel_GetBool("System.ScreenSaverActive")
 
 def InfoLabel_IsMuted():
-  return InfoLabel_GetBool("Player.Muted")
+  return InfoLabel_GetBool("Window.IsActive(mutebug)")
+
+def InfoLabel_IsStreamAT():
+  return InfoLabel_GetBool("Player.IsInternetStream")
 
 def InfoLabel_GetVolumePercent():
   volumedb = float(string.replace(string.replace(InfoLabel_GetInfoLabel("Player.Volume"), ",", "."), " dB", ""))

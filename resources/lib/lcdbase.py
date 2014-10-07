@@ -37,8 +37,8 @@ __scriptname__ = sys.modules[ "__main__" ].__scriptname__
 __settings__ = sys.modules[ "__main__" ].__settings__
 __cwd__ = sys.modules[ "__main__" ].__cwd__
 __icon__ = sys.modules[ "__main__" ].__icon__
-__lcdxml__ = xbmc.translatePath( os.path.join("special://masterprofile","LCD.xml"))
-__lcddefaultxml__ = xbmc.translatePath( os.path.join(__cwd__, "resources", "LCD.xml.defaults"))
+__lcdxml__ = xbmc.translatePath( os.path.join("special://masterprofile","VFD.xml"))
+__lcddefaultxml__ = xbmc.translatePath( os.path.join(__cwd__, "resources", "VFD.xml.defaults"))
 
 from settings import *
 from extraicons import *
@@ -54,12 +54,13 @@ class LCD_MODE:
   LCD_MODE_MUSIC       = 1
   LCD_MODE_VIDEO       = 2
   LCD_MODE_TVSHOW      = 3
-  LCD_MODE_NAVIGATION  = 4
-  LCD_MODE_SCREENSAVER = 5
-  LCD_MODE_XBE_LAUNCH  = 6
-  LCD_MODE_PVRTV       = 7
-  LCD_MODE_PVRRADIO    = 8
-  LCD_MODE_MAX         = 9
+  LCD_MODE_MUSICVIDEO  = 4
+  LCD_MODE_NAVIGATION  = 5
+  LCD_MODE_SCREENSAVER = 6
+  LCD_MODE_XBE_LAUNCH  = 7
+  LCD_MODE_PVRTV       = 8
+  LCD_MODE_PVRRADIO    = 9
+  LCD_MODE_MAX         = 10
 
 class LCD_LINETYPE:
   LCD_LINETYPE_TEXT      = "text"
@@ -81,7 +82,7 @@ g_dictEmptyLineDescriptor['align'] = LCD_LINEALIGN.LCD_LINEALIGN_LEFT
 
 class LcdBase():
   def __init__(self):
-    # configuration vars (from LCD.xml)
+    # configuration vars (from VFD.xml)
     self.m_lcdMode = [None] * LCD_MODE.LCD_MODE_MAX
     self.m_extraBars = [None] * (LCD_EXTRABARS_MAX + 1)
     self.m_bAllowEmptyLines = False
@@ -177,11 +178,11 @@ class LcdBase():
 
     if not os.path.isfile(__lcdxml__):
       if not os.path.isfile(__lcddefaultxml__):
-        log(xbmc.LOGERROR, "No LCD.xml found and LCD.xml.defaults missing, expect problems!")
+        log(xbmc.LOGERROR, "No VFD.xml found and VFD.xml.defaults missing, expect problems!")
       else:
         try:
           shutil.copy2(__lcddefaultxml__, __lcdxml__)
-          log(xbmc.LOGNOTICE, "Initialised LCD.xml from defaults")
+          log(xbmc.LOGNOTICE, "Initialised VFD.xml from defaults")
           ret = True
         except:
           log(xbmc.LOGERROR, "Failed to copy LCD defaults!")
@@ -205,7 +206,7 @@ class LcdBase():
     # make sure we got reasonable defaults for users who didn't adapt to newest additions
     bGotDefaultSkin = self.LoadSkin(__lcddefaultxml__, True)
 
-    # check for user-LCD.xml, optionally create it
+    # check for user-VFD.xml, optionally create it
     bSkinHandled = self.ManageLCDXML()
 
     # try to load user setup
@@ -330,6 +331,9 @@ class LcdBase():
         tmpMode = element.find("tvshow")
         self.LoadMode(tmpMode, LCD_MODE.LCD_MODE_TVSHOW)
 
+        tmpMode = element.find("musicvideo")
+        self.LoadMode(tmpMode, LCD_MODE.LCD_MODE_MUSICVIDEO)
+
         tmpMode = element.find("general")
         self.LoadMode(tmpMode, LCD_MODE.LCD_MODE_GENERAL)
 
@@ -350,7 +354,7 @@ class LcdBase():
 
         bHaveSkin = True
 
-        # LCD.xml parsed successfully, so reset warning flag
+        # VFD.xml parsed successfully, so reset warning flag
         self.m_bXMLWarningDisplayed = False
 
     return bHaveSkin
@@ -360,7 +364,7 @@ class LcdBase():
     self.m_lcdMode[mode] = []
     
     if node == None:
-      log(xbmc.LOGWARNING, "Empty Mode %d, consider checking LCD.xml" % (mode))
+      log(xbmc.LOGWARNING, "Empty Mode %d, consider checking VFD.xml" % (mode))
 
       # if mode is empty, initialise with blank line
       if len(self.m_lcdMode[mode]) <= 0:
@@ -369,7 +373,7 @@ class LcdBase():
       return
 
     if len(node.findall("line")) <= 0:
-      log(xbmc.LOGWARNING, "Mode %d defined without lines, consider checking LCD.xml" % (mode))
+      log(xbmc.LOGWARNING, "Mode %d defined without lines, consider checking VFD.xml" % (mode))
 
       if len(self.m_lcdMode[mode]) <= 0:
         self.m_lcdMode[mode].append(g_dictEmptyLineDescriptor)
@@ -543,7 +547,7 @@ class LcdBase():
     return (mode == LCD_MODE.LCD_MODE_MUSIC or mode == LCD_MODE.LCD_MODE_PVRRADIO) and settings_getDimOnMusicPlayback()
 
   def DoDimOnVideo(self, mode):
-    return (mode == LCD_MODE.LCD_MODE_VIDEO or mode == LCD_MODE.LCD_MODE_TVSHOW or mode == LCD_MODE.LCD_MODE_PVRTV) and settings_getDimOnVideoPlayback()
+    return (mode == LCD_MODE.LCD_MODE_VIDEO or mode == LCD_MODE.LCD_MODE_TVSHOW or mode == LCD_MODE.LCD_MODE_MUSICVIDEO or mode == LCD_MODE.LCD_MODE_PVRTV) and settings_getDimOnVideoPlayback()
 
   def DoDimOnScreensaver(self, mode):
     return (mode == LCD_MODE.LCD_MODE_SCREENSAVER) and settings_getDimOnScreensaver()
@@ -756,6 +760,11 @@ class LcdBase():
       self.m_cExtraIcons.SetIconState(LCD_EXTRAICONS.LCD_EXTRAICON_MUTE, True)
     else:
       self.m_cExtraIcons.SetIconState(LCD_EXTRAICONS.LCD_EXTRAICON_MUTE, False)
+      
+    if InfoLabel_IsStreamAT():
+      self.m_cExtraIcons.SetIconState(LCD_EXTRAICONS.LCD_EXTRAICON_AT, True)
+    else:
+      self.m_cExtraIcons.SetIconState(LCD_EXTRAICONS.LCD_EXTRAICON_AT, False)
 
     if ispaused:
       self.m_cExtraIcons.SetIconState(LCD_EXTRAICONS.LCD_EXTRAICON_PAUSE, True)
