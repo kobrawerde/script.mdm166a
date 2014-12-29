@@ -1,3 +1,7 @@
+  [B]1.0.1[/B]
+  
+- Update for Kodi 14.x Helix
+  
   [B]0.0.1[/B]
 
 First version for testing based on script.xbmc.lcdproc v2.6.0 for Kodi 14.
