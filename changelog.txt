@@ -1,3 +1,7 @@
+  [B]1.0.2[/B]
+  
+- Changed dimming during pause.
+  
   [B]1.0.1[/B]
   
 - Update for Kodi 14.x Helix
